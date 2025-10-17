@@ -1,12 +1,14 @@
 # Simple Counter App
 
-This is a minimalist, production-ready single-page web application that demonstrates a basic counter functionality with increment and decrement buttons. It's built with modern HTML, CSS, and JavaScript, focusing on clean code, responsiveness, and user-friendliness.
+This is a minimalist, production-ready single-page web application that demonstrates a basic counter functionality with increment and decrement, and the ability to save named counts. It's built with modern HTML, CSS, and JavaScript, focusing on clean code, responsiveness, and user-friendliness.
 
 ## Features
 
 - **Increment Button**: Increases the counter value.
 - **Decrement Button**: Decreases the counter value (prevents going below zero).
 - **Current Value Display**: Shows the live count.
+- **Save Button**: Allows users to save the current counter value with a custom name.
+- **Saved Counts Display**: A dedicated section to view all saved counts and their names.
 - **Stylish Design**: Modern and responsive UI using CSS.
 - **Pure JavaScript**: No frameworks or libraries are used, keeping it lightweight.
 
@@ -45,29 +47,42 @@ That's it! The application will load, and you can start interacting with the cou
 
 - Sets up the basic HTML structure, including meta tags for responsiveness and character encoding.
 - Links to `style.css` for presentation and `script.js` for functionality.
-- Contains a `div` with the class `container` to hold the main elements.
+- Contains a `div` with the class `container` to hold the main counter elements.
 - `<h1>` for the app title.
 - A `div` with `id="counter-display"` to show the current count.
 - Two `<button>` elements with `id="increment-btn"` and `id="decrement-btn"`.
+- **New**: A `save-btn` to trigger the save functionality.
+- **New**: A `save-input-area` div, initially hidden, containing an `input` field (`save-name-input`) for naming saved counts and a `confirm-save-btn`.
+- **New**: A `saved-counts-container` div to display a list of saved counts, using an unordered list (`saved-counts-list`).
 
 ### `style.css`
 
 - Uses `Roboto` font from Google Fonts for a clean look.
-- Centers the content vertically and horizontally on the page.
+- Centers the main counter content vertically and horizontally on the page.
 - Applies a modern card-like design to the `.container` with `box-shadow` and `border-radius`.
 - Styles the `counter-display` with a large, bold font.
-- Styles the buttons (`.btn`) with distinct colors, padding, and hover/active effects for a good user experience.
+- Styles the buttons (`.btn`) with distinct colors, padding, and hover/active effects.
+- **New**: Styles for the `save-btn` and `confirm-save-btn`.
+- **New**: Styles for the `save-input-area` and `save-name-input`.
+- **New**: Styles for the `saved-counts-container` and `saved-counts-list` to present saved items clearly.
 - Includes media queries to ensure the app is responsive and looks good on smaller screens.
 
 ### `script.js`
 
 - Uses `DOMContentLoaded` to ensure the DOM is fully loaded before executing JavaScript.
-- Retrieves references to the `counter-display`, `increment-btn`, and `decrement-btn` elements.
+- Retrieves references to all necessary DOM elements, including the new save-related elements.
 - Initializes a `count` variable to `0`.
-- `updateCounterDisplay()` function: A utility function to update the `textContent` of `counterDisplay` with the current `count`.
+- `updateCounterDisplay()` function: A utility function to update the `textContent` of `counterDisplay`.
 - `handleIncrement()` function: Increments `count` and calls `updateCounterDisplay()`.
-- `handleDecrement()` function: Decrements `count` and calls `updateCounterDisplay()`. It includes a conditional check (`if (count > 0)`) to prevent the count from going into negative numbers, ensuring a non-negative counter.
-- Event listeners are attached to both buttons to call their respective handler functions on click.
+- `handleDecrement()` function: Decrements `count` and calls `updateCounterDisplay()`, preventing the count from going below zero.
+- **New**: `handleSaveClick()`: Toggles the visibility of the `save-input-area`.
+- **New**: `handleConfirmSave()`: 
+    - Retrieves the name from `save-name-input`.
+    - Validates the name (prevents empty names).
+    - Creates a new list item (`<li>`) with the saved name and count.
+    - Appends the new item to `saved-counts-list`.
+    - Clears the input field and hides the `save-input-area`.
+- Event listeners are attached to all buttons: `increment-btn`, `decrement-btn`, `save-btn`, and `confirm-save-btn`.
 - `updateCounterDisplay()` is called initially to display the starting value of `0` when the page loads.
 
 ## Customization
