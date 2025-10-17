@@ -9,6 +9,9 @@ This is a minimalist, production-ready single-page web application that demonstr
 - **Current Value Display**: Shows the live count.
 - **Save Button**: Allows users to save the current counter value with a custom name.
 - **Saved Counts Display**: A dedicated section to view all saved counts and their names.
+- **Reset Button**: Resets the current counter value to zero.
+- **Clear Saved Button**: Clears all previously saved counts.
+- **Confirmation Dialogs**: Prompts for confirmation before resetting the counter or clearing saved counts.
 - **Stylish Design**: Modern and responsive UI using CSS.
 - **Pure JavaScript**: No frameworks or libraries are used, keeping it lightweight.
 
@@ -51,9 +54,11 @@ That's it! The application will load, and you can start interacting with the cou
 - `<h1>` for the app title.
 - A `div` with `id="counter-display"` to show the current count.
 - Two `<button>` elements with `id="increment-btn"` and `id="decrement-btn"`.
-- **New**: A `save-btn` to trigger the save functionality.
-- **New**: A `save-input-area` div, initially hidden, containing an `input` field (`save-name-input`) for naming saved counts and a `confirm-save-btn`.
-- **New**: A `saved-counts-container` div to display a list of saved counts, using an unordered list (`saved-counts-list`).
+- A `save-btn` to trigger the save functionality.
+- **New**: A `reset-btn` to reset the current counter.
+- **New**: A `clear-saved-btn` to clear all saved counts.
+- A `save-input-area` div, initially hidden, containing an `input` field (`save-name-input`) for naming saved counts and a `confirm-save-btn`.
+- A `saved-counts-container` div to display a list of saved counts, using an unordered list (`saved-counts-list`).
 
 ### `style.css`
 
@@ -62,27 +67,30 @@ That's it! The application will load, and you can start interacting with the cou
 - Applies a modern card-like design to the `.container` with `box-shadow` and `border-radius`.
 - Styles the `counter-display` with a large, bold font.
 - Styles the buttons (`.btn`) with distinct colors, padding, and hover/active effects.
-- **New**: Styles for the `save-btn` and `confirm-save-btn`.
-- **New**: Styles for the `save-input-area` and `save-name-input`.
-- **New**: Styles for the `saved-counts-container` and `saved-counts-list` to present saved items clearly.
+- Styles for the `save-btn` and `confirm-save-btn`.
+- **New**: Styles for `reset-btn` and `clear-saved-btn`.
+- Styles for the `save-input-area` and `save-name-input`.
+- Styles for the `saved-counts-container` and `saved-counts-list` to present saved items clearly.
 - Includes media queries to ensure the app is responsive and looks good on smaller screens.
 
 ### `script.js`
 
 - Uses `DOMContentLoaded` to ensure the DOM is fully loaded before executing JavaScript.
-- Retrieves references to all necessary DOM elements, including the new save-related elements.
+- Retrieves references to all necessary DOM elements, including the new save-related elements, and the new reset and clear saved buttons.
 - Initializes a `count` variable to `0`.
 - `updateCounterDisplay()` function: A utility function to update the `textContent` of `counterDisplay`.
 - `handleIncrement()` function: Increments `count` and calls `updateCounterDisplay()`.
 - `handleDecrement()` function: Decrements `count` and calls `updateCounterDisplay()`, preventing the count from going below zero.
-- **New**: `handleSaveClick()`: Toggles the visibility of the `save-input-area`.
-- **New**: `handleConfirmSave()`: 
+- `handleSaveClick()`: Toggles the visibility of the `save-input-area`.
+- `handleConfirmSave()`:
     - Retrieves the name from `save-name-input`.
     - Validates the name (prevents empty names).
     - Creates a new list item (`<li>`) with the saved name and count.
     - Appends the new item to `saved-counts-list`.
     - Clears the input field and hides the `save-input-area`.
-- Event listeners are attached to all buttons: `increment-btn`, `decrement-btn`, `save-btn`, and `confirm-save-btn`.
+- **New**: `handleReset()`: Prompts for confirmation and, if confirmed, resets `count` to `0` and updates the display.
+- **New**: `handleClearSaved()`: Prompts for confirmation and, if confirmed, clears all child elements from `saved-counts-list`.
+- Event listeners are attached to all buttons: `increment-btn`, `decrement-btn`, `save-btn`, `confirm-save-btn`, `reset-btn`, and `clear-saved-btn`.
 - `updateCounterDisplay()` is called initially to display the starting value of `0` when the page loads.
 
 ## Customization
