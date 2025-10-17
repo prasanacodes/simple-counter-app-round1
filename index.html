@@ -14,8 +14,21 @@
         <div class="buttons">
             <button id="decrement-btn" class="btn decrement-btn">Decrement</button>
             <button id="increment-btn" class="btn increment-btn">Increment</button>
+            <button id="save-btn" class="btn save-btn">Save</button>
+        </div>
+        <div id="save-input-area" class="save-input-area hidden">
+            <input type="text" id="save-name-input" placeholder="Enter name for saved count">
+            <button id="confirm-save-btn" class="btn confirm-save-btn">Confirm Save</button>
         </div>
     </div>
+
+    <div class="saved-counts-container">
+        <h2>Saved Counts</h2>
+        <ul id="saved-counts-list" class="saved-counts-list">
+            <!-- Saved counts will be dynamically added here -->
+        </ul>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
