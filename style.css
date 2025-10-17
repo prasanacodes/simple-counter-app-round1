@@ -104,6 +104,28 @@ h1 {
     transform: translateY(-2px);
 }
 
+/* New Buttons */
+.reset-btn {
+    background-color: #95a5a6;
+    color: #ffffff;
+}
+
+.reset-btn:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+.clear-saved-btn {
+    background-color: #e74c3c;
+    color: #ffffff;
+    margin-top: 20px; /* Space from the list */
+}
+
+.clear-saved-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
 /* Save Input Area */
 .save-input-area {
     display: flex;
@@ -284,5 +306,9 @@ h1 {
     .saved-count-item {
         font-size: 1em;
         padding: 10px 12px;
+    }
+
+    .clear-saved-btn {
+        margin-top: 15px;
     }
 }
