@@ -1,6 +1,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     display: flex;
+    flex-direction: column; /* Changed to column to stack main container and saved counts */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -9,6 +10,8 @@ body {
     color: #333;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in element's total width and height */
 }
 
 .container {
@@ -20,6 +23,7 @@ body {
     max-width: 400px;
     width: 90%;
     box-sizing: border-box;
+    margin-bottom: 30px; /* Space between counter and saved counts */
 }
 
 h1 {
@@ -36,19 +40,20 @@ h1 {
     margin-bottom: 40px;
     padding: 10px 0;
     border-bottom: 2px solid #ecf0f1;
-    display: inline-block; /* To make border-bottom fit content */
+    display: inline-block;
 }
 
 .buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap; /* For responsiveness */
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px; /* Space between buttons and save input area */
 }
 
 .btn {
-    padding: 15px 30px;
-    font-size: 1.2em;
+    padding: 15px 25px;
+    font-size: 1.1em;
     font-weight: 700;
     border: none;
     border-radius: 8px;
@@ -89,10 +94,158 @@ h1 {
     transform: translateY(-2px);
 }
 
+.save-btn {
+    background-color: #f39c12;
+    color: #ffffff;
+}
+
+.save-btn:hover {
+    background-color: #e67e22;
+    transform: translateY(-2px);
+}
+
+/* Save Input Area */
+.save-input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    opacity: 1;
+    max-height: 100px; /* Arbitrary max-height for transition */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.save-input-area.hidden {
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0; /* Collapse margin when hidden */
+    pointer-events: none; /* Disable interaction when hidden */
+}
+
+#save-name-input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    width: calc(100% - 24px); /* Account for padding */
+    box-sizing: border-box;
+}
+
+#save-name-input::placeholder {
+    color: #aaa;
+}
+
+#save-name-input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.confirm-save-btn {
+    background-color: #3498db;
+    color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.confirm-save-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Saved Counts Column */
+.saved-counts-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.saved-counts-container h2 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    font-weight: 700;
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 15px;
+}
+
+.saved-counts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px; /* Limit height and make scrollable */
+    overflow-y: auto;
+    text-align: left; /* Align list items to the left */
+}
+
+.saved-counts-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.saved-counts-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.saved-counts-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.saved-counts-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.saved-count-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+    color: #555;
+    transition: background-color 0.2s ease;
+}
+
+.saved-count-item:last-child {
+    margin-bottom: 0;
+}
+
+.saved-count-item:hover {
+    background-color: #f0f0f0;
+}
+
+.saved-count-item strong {
+    color: #2c3e50;
+}
+
+.saved-count-item span {
+    font-weight: 700;
+    color: #3498db;
+    font-size: 1.2em;
+}
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
-    .container {
-        padding: 30px;
+    body {
+        padding: 10px;
+    }
+
+    .container,
+    .saved-counts-container {
+        padding: 25px;
+        width: 100%; /* Take full width on small screens */
+        max-width: none; /* Remove max-width constraint */
     }
 
     h1 {
@@ -104,14 +257,32 @@ h1 {
         margin-bottom: 30px;
     }
 
-    .btn {
-        width: 100%;
-        margin-bottom: 15px;
-        font-size: 1.1em;
-    }
-
     .buttons {
         flex-direction: column;
         gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        font-size: 1.1em;
+        padding: 12px 20px;
+    }
+
+    .save-input-area {
+        margin-top: 10px;
+    }
+
+    #save-name-input {
+        width: 100%;
+    }
+
+    .saved-counts-container h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .saved-count-item {
+        font-size: 1em;
+        padding: 10px 12px;
     }
 }
