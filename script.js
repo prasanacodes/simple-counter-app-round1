@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const incrementBtn = document.getElementById('increment-btn');
     const decrementBtn = document.getElementById('decrement-btn');
     const saveBtn = document.getElementById('save-btn');
+    const resetBtn = document.getElementById('reset-btn'); // New
+    const clearSavedBtn = document.getElementById('clear-saved-btn'); // New
     const saveInputArea = document.getElementById('save-input-area');
     const saveNameInput = document.getElementById('save-name-input');
     const confirmSaveBtn = document.getElementById('confirm-save-btn');
@@ -72,11 +74,34 @@ document.addEventListener('DOMContentLoaded', () => {
         saveInputArea.classList.add('hidden');
     };
 
+    /**
+     * Handles the reset button click event.
+     * Prompts for confirmation and resets the counter to 0 if confirmed.
+     */
+    const handleReset = () => {
+        if (confirm('Are you sure you want to reset the counter to 0?')) {
+            count = 0;
+            updateCounterDisplay();
+        }
+    };
+
+    /**
+     * Handles the clear saved button click event.
+     * Prompts for confirmation and clears all saved counts if confirmed.
+     */
+    const handleClearSaved = () => {
+        if (confirm('Are you sure you want to clear all saved counts? This action cannot be undone.')) {
+            savedCountsList.innerHTML = ''; // Clears all child elements
+        }
+    };
+
     // Attach event listeners to the buttons
     incrementBtn.addEventListener('click', handleIncrement);
     decrementBtn.addEventListener('click', handleDecrement);
     saveBtn.addEventListener('click', handleSaveClick);
     confirmSaveBtn.addEventListener('click', handleConfirmSave);
+    resetBtn.addEventListener('click', handleReset); // New
+    clearSavedBtn.addEventListener('click', handleClearSaved); // New
 
     // Allow saving by pressing Enter in the name input field
     saveNameInput.addEventListener('keypress', (event) => {
